@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- {% for car in car_list %}
+    {% for colname in car.column_set.all  %}
+        <p>{{colname}}</p>
+    {% endfor %}
+{% endfor %} -->
+
+
+<div style="width: 100%;" id="list_car">
+    <div>
+        <div style=" justify-content: end;">
+        <h1 class="text-center">Listed Cars</h1>
+        <label name="filter" value="Filter By">Filter:</label>
+       
+        <select> 
+            {%for car in make%}
+            <option value="{{car}}">{{car}}</option>
+            {%endfor%}
+        </select>
+        <button type="button" name="button" value="button">Clear</button>
+    </div>
+
+    
+    <table class="table table-striped">
+        <tr><th>ID</th>
+            <th>Make</th>
+            <th>Model Name</th>
+            <th>Year</th>
+            <th>Condition</th>
+            <th>Asking Price</th>
+            <th>Seller Name</th>
+            <th>Seller Mobile</th>
+        </tr>
+        
+        
+        
+        {% for car in page_obj %}
+            <tr>
+                <td>{{car.id}}</td>
+                <td>{{car.make}}</td><td></td>
+                <td>{{car.model_name}}</td><td></td>
+                <td>{{car.year}}</td><td></td>
+                <td>{{car.condition}}</td><td></td>
+                <td>{{car.asking_price}}</td><td></td>
+                <td>{{car.seller_name}}</td><td></td>
+                <td>{{car.seller_mobile}}</td><td></td>
+                <td><a href="listing_buy_query/{{car.id}}"><input type="button" id="{{car.id}}" value="Buy" name="Buy"/></a></td>
+            </tr>
+        {% endfor %}    
+
+        
+        </table>    
+       
+    </div>
+        
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+<script>
+    function display_list_form(){
+        let id_btn = document.getElementById("list_car_btn");
+        id_btn.addEventListener('click',()=>{
+            const form = document.getElementById('list_car');
+            if (form.style.display === 'none') {
+                // 👇️ this SHOWS the form
+                form.style.display = 'block';
+            } else {
+                // 👇️ this HIDES the form
+                form.style.display = 'none';
+            }
+        });
+    }
+
+
+</script>
+
+{% endblock content %}

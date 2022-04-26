@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <!-- <form action="" method="">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="" />
+        <label for="phn">Mobile:</label>
+        <input type="text" name="phn" value="" />
+        <input type="button" value="Submit" name="Submit"/>
+    </form> -->
+    {% load crispy_forms_tags %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }} 
+        
+    <input type="submit" value="Submit">
+    </form> 
+
+</div>
+{% endblock %}
