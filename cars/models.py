@@ -40,6 +40,19 @@ class Listing(models.Model):
             return f"{self.make} ({self.model_name}) {self.seller_name}"
         return self.make
 
+class Query2(models.Model):
+    name = models.CharField(max_length=200,blank=False,null=False)
+    mobile = models.CharField(max_length=200,blank=False,null=False)
+    car_id = models.CharField(max_length=200,blank=True,null=True)
+    
+
+
+    def __str__(self):
+        
+        return f"{self.name} : {self.mobile}"
+        
+
+
 
 
 class Listing2(models.Model):
@@ -52,7 +65,8 @@ class Listing2(models.Model):
     seller_name = models.CharField(max_length=100,blank=False,null=False)
     seller_mobile = models.IntegerField(blank=False, null=False)
     
-    status = models.CharField(max_length=100,blank=True,null=True)
+    status_id = models.ForeignKey(Query2, blank=False, null=True, on_delete=models.CASCADE)
+
 
     def __str__(self):
         if self.year:
@@ -60,12 +74,3 @@ class Listing2(models.Model):
         return self.make
 
 
-class Query2(models.Model):
-    name = models.CharField(max_length=100,blank=False,null=False)
-    mobile = models.CharField(max_length=100,blank=False,null=False)
-    query_id = models.ForeignKey(Listing2, blank=False, null=False, on_delete=models.CASCADE)
-
-    def __str__(self):
-        if self.query_id:
-            return f"{self.name} : {self.mobile} :{self.query_id}"
-        return self.name

@@ -36,6 +36,7 @@
             <th>Seller Name</th>
             <th>Seller Mobile</th>
             <th>Action</th>
+            <th>Status</th>
         </tr>
         
         
@@ -52,7 +53,7 @@
                 <td>{{car.seller_mobile}}</td>
                 
                 <td><a href="listing_buy_query/{{car.id}}"><input type="button" id="{{car.id}}" value="Buy" name="Buy"/></a></td>
-                
+                <td>{{car.Status}}</td>
             </tr>
         {% endfor %}    
 
@@ -62,6 +63,25 @@
     </div>
         
 </div>
+
+<div id="Deals">
+    <table class="table table-striped">
+        <tr>
+            <th>Seller Name</th>
+            <th>Seller Number</th>
+        </tr>
+        
+        {% for query in query_obj %}
+            <tr>
+                <td>{{query.name}}</td>
+                <td>{{query.mobile}}</td>
+            </tr>
+        {% endfor %}    
+
+
+
+</div>
+
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}

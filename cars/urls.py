@@ -8,6 +8,7 @@ urlpatterns = [
     path('cars/list_car', views.List_car_form),
     path('cars/thanks', views.Thanks_list_form),
     path('cars/home', views.Homepage),
+    path('cars/admin', views.Admin),
     path('cars/login', views.signin),
     path('cars/logout', views.signout),
     path('cars/register', views.signup),

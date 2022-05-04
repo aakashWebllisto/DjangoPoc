@@ -48,6 +48,8 @@ def Homepage(request):
         list_of_cars = Listing2.objects.all()
         list_of_query = Query2.objects.all()
 
+        
+
         p = Paginator(list_of_cars,10)
         page_number = request.GET.get('page')
         page_obj = p.get_page(page_number)
@@ -58,21 +60,25 @@ def Homepage(request):
     else:
         return render(request,'cars/homepage.html',{'login':False})
 
+def Admin(request):
+    pass
+
 def Listing_buy_query(request,id):
 
     if request.method == 'POST':
             # create a form instance and populate it with data from the request:
             form = QueryListCarForm(request.POST)
             # check whether it's valid:
+
             if form.is_valid():
-                form.save()
-                
+                query_form = form.save()
+                query_form
                 car = Listing2.objects.get(id=id)
                 query_details = Query2.objects.order_by('id')
                 query_details = query_details[len(query_details)-1]
 
                 # Send email to iron mike regarding query details and commission
-                sendMailToCustomer(car,query_details)
+                # sendMailToCustomer(car,query_details)
                 
                 return render(request,'cars/thanks_list_query.html',{'car':car,'query_details':query_details})
 
