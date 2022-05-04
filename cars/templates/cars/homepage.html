@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+
+
+
+
 {% block content %}
 <!-- {% for car in car_list %}
     {% for colname in car.column_set.all  %}
@@ -10,16 +14,15 @@
 
 <div style="width: 100%;" id="list_car">
     <div>
-        <div style=" justify-content: end;">
-        <h1 class="text-center">Listed Cars</h1>
-        <label name="filter" value="Filter By">Filter:</label>
-       
-        <select> 
-            {%for car in make%}
-            <option value="{{car}}">{{car}}</option>
-            {%endfor%}
-        </select>
-        <button type="button" name="button" value="button">Clear</button>
+        {% if not login %}
+        <form action="">
+           <a href="login"><button type="button" name="session" value="">Login</button></a>
+           <a href="register"><button type="button" name="session" value="">Register</button></a>
+        </form>
+        {% else %}
+            <a href="logout"><button type="button" name="session" value="">Logout</button></a>
+        {% endif %}
+
     </div>
 
     
@@ -32,6 +35,7 @@
             <th>Asking Price</th>
             <th>Seller Name</th>
             <th>Seller Mobile</th>
+            <th>Action</th>
         </tr>
         
         
@@ -39,14 +43,16 @@
         {% for car in page_obj %}
             <tr>
                 <td>{{car.id}}</td>
-                <td>{{car.make}}</td><td></td>
-                <td>{{car.model_name}}</td><td></td>
-                <td>{{car.year}}</td><td></td>
-                <td>{{car.condition}}</td><td></td>
-                <td>{{car.asking_price}}</td><td></td>
-                <td>{{car.seller_name}}</td><td></td>
-                <td>{{car.seller_mobile}}</td><td></td>
+                <td>{{car.make}}</td>
+                <td>{{car.model_name}}</td>
+                <td>{{car.year}}</td>
+                <td>{{car.condition}}</td>
+                <td>{{car.asking_price}}</td>
+                <td>{{car.seller_name}}</td>
+                <td>{{car.seller_mobile}}</td>
+                
                 <td><a href="listing_buy_query/{{car.id}}"><input type="button" id="{{car.id}}" value="Buy" name="Buy"/></a></td>
+                
             </tr>
         {% endfor %}    
 

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="register" method="POST" >
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" required/>
+    <label for="email">Email:</label>
+    <input type="email" name="email" required/>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required/>
+    <!-- <label for="login" name="login">Login</label>
+    <input type="radio" name="session" id="login" value="login"> 
+    <label for="register" name="register">Register</label>
+    <input type="radio" name="session" id="register" value="register">-->
+    <input type="submit" name="submit" value="Submit"/>
+</form>
+
+{% endblock %}

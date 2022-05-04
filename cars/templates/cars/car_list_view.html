@@ -13,13 +13,14 @@
         <table class="table table-striped mt-5">
             <tdead>
                 {% load crispy_forms_tags %}
-                <form action="list_car" method="post">
+                <form action="list_car" method="POST">
                         {% csrf_token %}
-                        {{ form|crispy }}    
-                <input type="submit" value="Submit">
+                        {{ form }}    
+                        
+                <input type="submit" value="Submit" />    
                 </form> 
             </tdead>
-    </table>    
+        </table>
        
     </div>
         
