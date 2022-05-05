@@ -16,17 +16,7 @@
 {% endfor %}
 </select>
 
-<script>
-    function display_Honda(){
-        window.alert("Honda")
-    }
-    function display_Tata(){
-        window.alert("Tata")
-    }
-    function display_Maruti(){
-        window.alert("Maruti")
-    }
-</script>
+
 
 
 <div style="width: 100%;" id="list_car">
@@ -69,7 +59,8 @@
                 <td>{{car.seller_name}}</td>
                 <td>{{car.seller_mobile}}</td>
                 
-                <td><a href="listing_buy_query/{{car.id}}"><input type="button" id="{{car.id}}" value="Buy" name="Buy"/></a></td>
+                <td><a href="listing_buy_query/{{car.id}}"><input type="button" id="buy" value="Buy" name="Buy"/></a></td>
+                <td><a href="listing_avail_query/{{car.id}}"><input type="button" id="avail" value="Make_Available" name="Make_Available"/></a></td>
                 <td>{{car.Status}}</td>
             </tr>
         {% endfor %}    
@@ -80,7 +71,7 @@
     </div>
         
 </div>
-
+<!-- 
 <div id="Deals">
     <table class="table table-striped">
         <tr>
@@ -97,7 +88,7 @@
 
 
 
-</div>
+</div> -->
 
 <div class="pagination">
     <span class="step-links">
@@ -135,5 +126,29 @@
 
 
 </script>
+
+<script>
+    function display_Honda(){
+        window.alert("Honda")
+        
+        let element = document.getElementById('sell');
+	    if (element.style.display != 'inline'){
+    	    element.style.display = 'inline';
+        }
+        else{
+            element.style.display = 'none'
+        }
+        
+        
+    }
+    function display_Tata(){
+        window.alert("Tata")
+    }
+    function display_Maruti(){
+        window.alert("Maruti")
+    }
+</script>
+
+
 
 {% endblock content %}
