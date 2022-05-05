@@ -10,12 +10,14 @@
         <input type="text" name="phn" value="" />
         <input type="button" value="Submit" name="Submit"/>
     </form> -->
+    
     {% load crispy_forms_tags %}
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }} 
         
     <input type="submit" value="Submit">
+    {{id}}
     </form> 
 
 </div>

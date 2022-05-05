@@ -1,6 +1,6 @@
 from msilib.sequence import AdminExecuteSequence
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
 
@@ -61,6 +61,11 @@ def Homepage(request):
     else:
         return render(request,'cars/homepage.html',{'login':False})
 
+
+def Filter_listing(request):
+    listing_filtered = Listing2.objects.all()
+    return JsonResponse({'listing_filtered': list(listing_filtered.values())})
+
 def Admin(request):
     
     listings = Listing2.objects.all()
@@ -74,16 +79,19 @@ def Admin(request):
         return render(request,'cars/admin.html',{'listings':listings})
 
 def Listing_buy_query(request,id):
-
+    print(id)
     if request.method == 'POST':
+            print(id)
             # create a form instance and populate it with data from the request:
             form = QueryListCarForm(request.POST)
             # check whether it's valid:
 
             if form.is_valid():
                 query_form = form.save()
-                query_form
-                car = Listing2.objects.get(id=id)
+                print(id)
+
+                # breakpoint()
+                car = Car.objects.get(id=id)
                 query_details = Query2.objects.order_by('id')
                 query_details = query_details[len(query_details)-1]
 
@@ -95,7 +103,6 @@ def Listing_buy_query(request,id):
 
         
     form = QueryListCarForm()
-
     return render(request,'cars/listing_buy_query.html',{'id':id,'form':form})
 
 def sendMailToCustomer(car,query_details):

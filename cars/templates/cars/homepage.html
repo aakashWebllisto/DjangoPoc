@@ -43,13 +43,16 @@
             <th>Seller Name</th>
             <th>Seller Mobile</th>
             <th>Action</th>
-            <th>Status</th>
+            <!-- <th>Status</th> -->
         </tr>
         
         
         
         {% for car in page_obj %}
-            <tr>
+        <div id ="rows">
+        <tr>
+                
+                
                 <td>{{car.id}}</td>
                 <td>{{car.make}}</td>
                 <td>{{car.model_name}}</td>
@@ -60,9 +63,11 @@
                 <td>{{car.seller_mobile}}</td>
                 
                 <td><a href="listing_buy_query/{{car.id}}"><input type="button" id="buy" value="Buy" name="Buy"/></a></td>
-                <td><a href="listing_avail_query/{{car.id}}"><input type="button" id="avail" value="Make_Available" name="Make_Available"/></a></td>
-                <td>{{car.Status}}</td>
-            </tr>
+                <!-- <td><a href="listing_avail_query/{{car.id}}"><input type="button" id="avail" value="Make_Available" name="Make_Available"/></a></td> -->
+                <!-- <td>{{car.Status}}</td> -->
+                
+        </tr>
+        </div>
         {% endfor %}    
 
         
@@ -127,27 +132,44 @@
 
 </script>
 
+<!-- <script>
+    $(document).ready(function() {
+      // send a GET request to build the list of todos
+      $.ajax({
+        url: 'cars/filter',
+        type: 'GET',
+        dataType: 'json',
+      }).done(function(response) {
+          console.log(response) // let's just print the data in the console for now
+        })
+    })
+  </script>
+
 <script>
-    function display_Honda(){
-        window.alert("Honda")
-        
-        let element = document.getElementById('sell');
-	    if (element.style.display != 'inline'){
-    	    element.style.display = 'inline';
-        }
-        else{
-            element.style.display = 'none'
-        }
-        
-        
-    }
-    function display_Tata(){
-        window.alert("Tata")
-    }
-    function display_Maruti(){
-        window.alert("Maruti")
-    }
-</script>
+    $(document).ready(function() {
+      // send a GET request to build the list of todos
+      $.ajax({
+        url: 'cars/filter/',
+        type: 'GET',
+        dataType: 'json',
+      }).done(function(response) {
+          for (var i in response.todos) {
+            var car = `<span>${response.cars[i].make}</span>`
+  
+            var item = `
+            <li class="list-group-item d-flex justify-content-between">
+              ${car}
+              <div>
+                <button id="edit" class="btn btn-success btn-sm" type="submit">Edit</button>
+                <button id="delete" class="btn btn-danger btn-sm" type="submit">Delete</button>
+              </div>
+            </li>
+            `
+            $('.list-group').append(item) // append the new item to the <ul> tag
+          }
+        })
+    })
+  </script> -->
 
 
 
