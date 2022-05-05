@@ -8,6 +8,7 @@ class ListCarForm(forms.ModelForm):
 
 class AdminForm(forms.Form):
     
+    approve_sell = forms.CharField(max_length=200)
 
 class QueryListCarForm(forms.ModelForm):
     class Meta:

@@ -1,3 +1,4 @@
+from msilib.sequence import AdminExecuteSequence
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -6,7 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 from .models import Car,Listing2,Company, Query2
-from .forms import ListCarForm,QueryListCarForm, UserForm, UserRegistrationForm
+from .forms import AdminForm, ListCarForm,QueryListCarForm, UserForm, UserRegistrationForm
 from django.core.paginator import Paginator
 
 
@@ -61,7 +62,16 @@ def Homepage(request):
         return render(request,'cars/homepage.html',{'login':False})
 
 def Admin(request):
-    pass
+    
+    listings = Listing2.objects.all()
+    if request.method == "POST":
+        form = AdminForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request,'cars/homepage.html',{'listings':listings})
+                
+    else:
+        return render(request,'cars/admin.html',{'listings':listings})
 
 def Listing_buy_query(request,id):
 

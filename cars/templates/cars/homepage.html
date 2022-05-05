@@ -5,11 +5,28 @@
 
 
 {% block content %}
-<!-- {% for car in car_list %}
-    {% for colname in car.column_set.all  %}
-        <p>{{colname}}</p>
-    {% endfor %}
-{% endfor %} -->
+<select id="filters_form" onchange="window['display_'+this.value]();">
+    <option value="-----">
+        -----
+    </option>
+{% for car in cars %}
+   <option value="{{car.make}}">
+       {{car.make}}
+   </option>
+{% endfor %}
+</select>
+
+<script>
+    function display_Honda(){
+        window.alert("Honda")
+    }
+    function display_Tata(){
+        window.alert("Tata")
+    }
+    function display_Maruti(){
+        window.alert("Maruti")
+    }
+</script>
 
 
 <div style="width: 100%;" id="list_car">
