@@ -62,9 +62,6 @@ def Homepage(request):
         return render(request,'cars/homepage.html',{'login':False})
 
 
-def Filter_listing(request):
-    listing_filtered = Listing2.objects.all()
-    return JsonResponse({'listing_filtered': list(listing_filtered.values())})
 
 def Admin(request):
     
@@ -76,6 +73,7 @@ def Admin(request):
             return render(request,'cars/homepage.html',{'listings':listings})
                 
     else:
+        form= AdminForm()
         return render(request,'cars/admin.html',{'listings':listings})
 
 def Listing_buy_query(request,id):
